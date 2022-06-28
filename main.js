@@ -15,15 +15,25 @@ const cars = generateCars(N);
 let bestCar = cars[0];
 
 if (localStorage.getItem("bestBrain")){
-    bestCar.brain=JSON.parse(
-        localStorage.getItem("bestBrain")
-    );
+    for (let i=0; i<cars.length; i++) {
+        cars[i].brain=JSON.parse(
+            localStorage.getItem("bestBrain")
+        );
+        if(i!=0){
+            NeuralNetwork.mutate(cars[i].brain,0.1);
+        }
+    }
+    
 }
 
 const traffic = [
     new Car(road.getLanecenter(1), -100,30,50,"DUMMY",2),
     new Car(road.getLanecenter(0), -300,30,50,"DUMMY",2),
-    new Car(road.getLanecenter(2), -300,30,50,"DUMMY",2)
+    new Car(road.getLanecenter(2), -300,30,50,"DUMMY",2),
+    new Car(road.getLanecenter(0), -500,30,50,"DUMMY",2),
+    new Car(road.getLanecenter(1), -500,30,50,"DUMMY",2),
+    new Car(road.getLanecenter(1), -700,30,50,"DUMMY",2),
+    new Car(road.getLanecenter(2), -700,30,50,"DUMMY",2)
 ];
 
 animate();
